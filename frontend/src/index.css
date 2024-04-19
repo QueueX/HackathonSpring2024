@@ -1,0 +1,193 @@
+/* Reset and base styles  */
+* {
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Links */
+
+a, a:link, a:visited  {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover  {
+    text-decoration: none;
+}
+
+/* Common */
+
+aside, nav, footer, header, section, main {
+	display: block;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    font-size: inherit;
+	font-weight: inherit;
+}
+
+ul, ul li {
+	list-style: none;
+}
+
+img {
+	vertical-align: top;
+}
+
+img, svg {
+	max-width: 100%;
+	height: auto;
+}
+
+address {
+  font-style: normal;
+}
+
+/* Form */
+
+input, textarea, button, select {
+	font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+
+input::-ms-clear {
+	display: none;
+}
+
+button, input[type="submit"] {
+    display: inline-block;
+    box-shadow: none;
+    background-color: transparent;
+    background: none;
+    cursor: pointer;
+}
+
+input:focus, input:active,
+button:focus, button:active {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+label {
+	cursor: pointer;
+}
+
+legend {
+	display: block;
+}
+
+
+/*------------------------------------------------------------*/
+:root {
+    --bg-color: #F9F4FF;
+    --btn: #E1c9FF;
+    --active-btn: #E7D4FF ;
+    --hover-btn: #DBBEFF;
+}
+
+
+body {
+    background-color: var(--bg-color);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#root {
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.page__auth {
+
+}
+
+.auth {
+    
+}
+
+.auth__container {
+    display: flex;
+    column-gap: 20%;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.auth__form {
+    padding: 20px;
+    position: relative;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+.login {
+    border-radius: 20px;
+    row-gap: 40px;
+}
+.login__header {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.login__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+}
+.login__inputBlock {
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+}
+.login__label {
+    font-size: 18px;
+}
+.login__input {
+    background-color: #FFF;
+    box-shadow: 0 0 0 1px rgb(105, 103, 103);
+    padding: 10px 25px;
+    border-radius: 50px;
+}
+.login__regLink {
+    align-self: flex-end;
+
+}
+.link {
+}
+
+.login__submit {
+
+    padding: 20px 40px;
+    background-color: var(--btn);
+    transition: .4s;
+    font-size: 20px;
+    border-radius: 50px;
+}
+.login__submit:hover {
+    background-color: var(--hover-btn);
+}
+
+.login__submit:active {
+    background-color: var(--active-btn);
+}
+
+.button {
+}
