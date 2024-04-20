@@ -74,28 +74,37 @@ export default function RegistrationForm({addMember,members,membersChange}) {
         setPassword('');
         setBanner('');
         membersChange([]);
-        fetch('url', {
+        fetch('http://localhost:8080/api/authentication/reg', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
+            mode: 'no-cors',
             body: JSON.stringify({
                 teamName: teamName,
-                login: login,
-                password: password,
-                bannerUrl: banner,
+                banneUrl: banner,
                 members: members,
-                mail: mail
+                mail: mail,
+                login: login,
+                password: password
+                
             })
-        })
-        console.log({
-            teamName: teamName,
-            login: login,
-            password: password,
-            bannerUrl: banner,
-            members: members,
-            mail: mail
-        })
+        }).then((response) => {
+            console.log(response)
+            return response.json();
+        }).then((data) => {
+            console.log(data);
+        }).catch(error => {
+            console.log(error);
+        });
+        // console.log({
+        //     teamName: teamName,
+        //     login: login,
+        //     password: password,
+        //     bannerUrl: banner,
+        //     members: members,
+        //     mail: mail
+        // });
     })
 
     return (

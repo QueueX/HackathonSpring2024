@@ -5,19 +5,25 @@ export default function Login() {
     const [login,setLogin] = useState('');
     const [password,setPassword] = useState('');
 
-    const clickHandler = useCallback((e) => {
+    const clickHandler = useCallback((e,login,pass) => {
             e.preventDefault();
-            fetch('url', {
+            console.log({login: login,password: pass});
+            fetch('http://localhost:8080/api/authentication/auth', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                body: JSON.stringify([login,password])
+                mode: 'no-cors',
+                body: JSON.stringify({login: login,password: pass})
+            }).then((response) => {
+                console.log(response)
+                return response.json();
+            }).then((data) => {
+                console.log(data);
+            }).catch(error => {
+                console.log(error);
             })
     },[])
-
-    
-    console.log('aaa');
 
     return (
         <div className="auth__form login">
@@ -31,7 +37,7 @@ export default function Login() {
                     <label htmlFor="inputPass" className="auth__label">Пароль:</label>
                     <input id="inputPass" type="password" className="auth__input" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
-                <button className="login__submit button" onClick={clickHandler}>Вход</button>
+                <button className="login__submit button" onClick={(e) => clickHandler(e,login,password)}>Вход</button>
             </form>
             <Link className="login__regLink auth__link" to="./registration">Регистрация</Link>
         </div>

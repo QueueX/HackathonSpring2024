@@ -25,6 +25,7 @@ export default function AddMemberForm({closeForm,addMembHandler}) {
         addMembHandler({name: name,description: description,photoUrl: photo});
         setName('');
         setDescription('');
+        setPhoto(null);
     })
 
     useEffect(() => {
