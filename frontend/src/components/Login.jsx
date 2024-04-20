@@ -5,7 +5,8 @@ export default function Login() {
     const [login,setLogin] = useState('');
     const [password,setPassword] = useState('');
 
-    const clickHandler = useCallback(() => {
+    const clickHandler = useCallback((e) => {
+            e.preventDefault();
             fetch('url', {
                 method: 'POST',
                 headers: {
@@ -16,27 +17,23 @@ export default function Login() {
     },[])
 
     
-
+    console.log('aaa');
 
     return (
         <div className="auth__form login">
-            <h1 className="login__header">Вход в аккаунт</h1>
-            <form className="login__form">
-                <div className="login__inputBlock">
-                    <label htmlFor="inputLog" className="login__label">Логин:</label>
-                    <input id="inputLog" type="text" className="login__input" value={login} onChange={(e) => setLogin(e.target.value)}/>
+            <h1 className="auth__header">Вход в аккаунт</h1>
+            <form className="login__form form">
+                <div className="auth__inputBlock">
+                    <label htmlFor="inputLog" className="auth__label">Логин:</label>
+                    <input id="inputLog" type="text" className="auth__input" value={login} onChange={(e) => setLogin(e.target.value)}/>
                 </div>
-                <div className="login__inputBlock">
-                    <label htmlFor="inputPass" className="login__label">Пароль:</label>
-                    <input id="inputPass" type="password" className="login__input" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <div className="auth__inputBlock">
+                    <label htmlFor="inputPass" className="auth__label">Пароль:</label>
+                    <input id="inputPass" type="password" className="auth__input" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
                 <button className="login__submit button" onClick={clickHandler}>Вход</button>
-                <pre>
-                    login: {login}<br/>
-                    password: {password}
-                </pre>
             </form>
-            <Link className="login__regLink link" to="./registration">Регистрация</Link>
+            <Link className="login__regLink auth__link" to="./registration">Регистрация</Link>
         </div>
     )
 }
