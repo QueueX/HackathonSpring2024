@@ -30,8 +30,7 @@ class AuthenticationService(
 
     fun authentication(request: AuthenticationRequest): Any {
         try {
-            authenticationManager.authenticate(UsernamePasswordAuthenticationToken(request.login, request.password))
-            val user = userRepository.findByUsername(request.login)
+            val user = userRepository.findByLogin(request.login)
             return JwtAuthResponse(jwtService.generateToken(user), UserResponse().apply {
                 this.username = user.username!!
                 this.email = user.email!!
