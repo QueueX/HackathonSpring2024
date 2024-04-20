@@ -7,7 +7,7 @@ export default function Registration() {
     const [addMembActive,setAddMembActive] = useState(false);
     let [members,setMembers] = useState([]);
     
-
+    
     const addMemberHandler = useCallback((obj) => {
         let tempMembers = members.slice(0);
         tempMembers.push(obj);

@@ -97,14 +97,14 @@ export default function RegistrationForm({addMember,members,membersChange}) {
         }).catch(error => {
             console.log(error);
         });
-        // console.log({
-        //     teamName: teamName,
-        //     login: login,
-        //     password: password,
-        //     bannerUrl: banner,
-        //     members: members,
-        //     mail: mail
-        // });
+        console.log({
+            teamName: teamName,
+            login: login,
+            password: password,
+            bannerUrl: banner,
+            members: members,
+            mail: mail
+        });
     })
 
     return (
@@ -152,7 +152,7 @@ export default function RegistrationForm({addMember,members,membersChange}) {
                 {hasError ? <p className="auth__errorMessage">Поля не должны быть пустыми !</p> : null}
                 <button className="login__submit button" disabled={hasError || mailWrong || passWrong || membersWrong} onClick={registrationSubmit}>Зарегистрироваться</button>
             </form>
-            <p>Есть аккаунт ? <Link className="login__regLink auth__link" to="/">Войти</Link></p>
+            <p>Есть аккаунт?&nbsp;&nbsp;<Link className="login__regLink auth__link" to="/authentification/auth"> Войти</Link></p>
         </div>
     )
 }

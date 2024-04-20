@@ -3,14 +3,21 @@ import { Route, Routes} from "react-router-dom";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
 import Authlayout from "./components/Layout";
+import { HomeLayout } from "./components/Layout";
+import HomePage from "./components/HomePage";
+import SinglePageCard from './components/SinglePageCard'
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Authlayout/>}>
-          <Route path="" element={<Login />}></Route>
-          <Route path="registration" element={<Registration />}></Route>
+        <Route path="/authentification/" element={<Authlayout/>}>
+          <Route path="auth" element={<Login />}></Route>
+          <Route path="reg" element={<Registration />}></Route>
+        </Route>
+        <Route path="/" element={<HomeLayout/>}>
+          <Route path="home" element={<HomePage />}></Route>
+          <Route path="home/:teamName" element={<SinglePageCard />}></Route>
         </Route>
       </Routes>
     </>
