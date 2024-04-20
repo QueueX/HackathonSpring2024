@@ -9,5 +9,5 @@ import java.util.UUID
 @Repository
 interface UserRepository : JpaRepository<UserEntity, UUID> {
     fun findByEmail(email: String): Optional<UserEntity>
-    fun findByLogin(login: String): UserEntity
+    fun findByUsername(login: String): UserEntity
 }
