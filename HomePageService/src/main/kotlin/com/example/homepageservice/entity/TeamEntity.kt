@@ -1,5 +1,6 @@
-package com.example.authenticationservice.entity
+package com.example.homepageservice.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 
 @Entity
@@ -10,16 +11,18 @@ class TeamEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "team_name", unique = true, nullable = false)
     var teamName: String? = null
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "banner_url", unique = true, nullable = false)
     var bannerUrl: String? = null
 
     @OneToMany(mappedBy = "teamId")
+    @JsonIgnore
     var members: List<MembersEntity>? = null
 
     @OneToOne(mappedBy = "teamId")
+    @JsonIgnore
     var user: UserEntity? = null
 
 }
