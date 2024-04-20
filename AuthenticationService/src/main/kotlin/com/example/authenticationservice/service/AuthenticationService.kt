@@ -13,14 +13,11 @@ import com.example.authenticationservice.response.JwtAuthResponse
 import com.example.authenticationservice.response.UserResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class AuthenticationService(
-    private val authenticationManager: AuthenticationManager,
     private val userRepository: UserRepository,
     private val jwtService: JwtService,
     private val teamRepository: TeamRepository,
