@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
-import banner from './../img/teamBanner2.jpg';
-import photo from './../img/teamBanner.jpg'
+import banner from './../img/teamBanner.jpg';
 import { useState, useCallback, useEffect} from "react";
 
 export default function SinglePageCard() {
@@ -17,7 +16,7 @@ export default function SinglePageCard() {
     const [activeMember,setActiveMember] = useState(0);
     const [memberPhoto,setMemberPhoto] = useState(members[0]?.photo);
 
-    const clickHandler = useCallback((index,event) => {
+    const clickHandler = useCallback((index) => {
         setMemberName(members[index]?.name);
         setMemberDescription(members[index]?.description);
         setMemberPhoto(members[index]?.photo);
@@ -44,7 +43,7 @@ export default function SinglePageCard() {
         }).catch(error => {
             console.log(error);
         });
-    },[teamName])
+    },[teamName]);
 
 
 
@@ -57,7 +56,7 @@ export default function SinglePageCard() {
             <div className="single-page__members">
                 <div className="single-page__membersSwitch">
                     {members.map((item,index) => (
-                        <button onClick={(event) => clickHandler(index,event)} key={index} className={index == activeMember ? 'memberSwitch__button memberSwitch__button_active' : 'memberSwitch__button'}>Участник {index+1}</button>
+                        <button onClick={(event) => clickHandler(index,event)} key={index} className={index === activeMember ? 'memberSwitch__button memberSwitch__button_active' : 'memberSwitch__button'}>Участник {index+1}</button>
                     ))}
                 </div>
                 <h3 className="single-page__memberName">{memberName || null}</h3>
@@ -65,7 +64,7 @@ export default function SinglePageCard() {
                     {
                         members.length ? 
                         <>
-                            <div className="single-page__memberPhoto"><img src={memberPhoto}/></div>
+                            <div className="single-page__memberPhoto"><img src={memberPhoto} alt="memberPhoto"/></div>
                             <p className="single-page__memberDescript">{memberDescription}</p>
                         </>
                         : null

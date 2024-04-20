@@ -17,6 +17,7 @@ function App() {
         </Route>
         <Route path="/" element={<HomeLayout/>}>
           <Route path="home" element={<HomePage />}></Route>
+          <Route path="home/cabinet" element={<HomePage />}></Route>
           <Route path="home/:teamName" element={<SinglePageCard />}></Route>
         </Route>
       </Routes>

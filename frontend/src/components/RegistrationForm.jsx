@@ -14,14 +14,48 @@ export default function RegistrationForm({addMember,members,membersChange}) {
     let [passWrong,setPassWrong] = useState(false);
     let [membersWrong,setMembersWrong] = useState(false);
 
-    function bannerChange(event) {
-        let fileReader = new FileReader();
-        fileReader.onload = function() {
-            setBanner(fileReader.result);
+    async function bannerChange(event) {
+        // let fileReader = new FileReader();
+        // fileReader.onload = function() {
+        //     setBanner(fileReader.result);
+        // }
+
+        // fileReader.readAsDataURL(event.target.files[0])
+        // const file = event.target.files[0];
+        const file = event.target.files[0];
+        try {
+            const imageUrl = await uploadImageToImgur(file, '877843ad1216eeb');
+            console.log("Ссылка на изображение: " + imageUrl);
+        } catch (error) {
+            console.error(error);
         }
 
-        fileReader.readAsDataURL(event.target.files[0]);
     }
+    const uploadImageToImgur = async (file, client_id) => {
+        const formData = new FormData();
+        formData.append('image', file);
+    
+        try {
+            const response = await fetch('https://api.imgur.com/3/image', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Client-ID ' + client_id
+                },
+                body: formData
+            });
+    
+            const data = await response.json();
+    
+            if (data.success) {
+                const imageUrl = data.data.link;
+                return imageUrl;
+            } else {
+                throw new Error("Ошибка при загрузке изображения: " + data.data.error);
+            }
+        } catch (error) {
+            throw new Error("Ошибка при выполнении запроса: " + error.message);
+        }
+    };
 
     function addCLickHAndler(event) {
         event.preventDefault();
@@ -87,7 +121,6 @@ export default function RegistrationForm({addMember,members,membersChange}) {
                 mail: mail,
                 login: login,
                 password: password
-                
             })
         }).then((response) => {
             console.log(response)

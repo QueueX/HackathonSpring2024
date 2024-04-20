@@ -39,7 +39,10 @@ export default function Login() {
                 </div>
                 <button className="login__submit button" onClick={(e) => clickHandler(e,login,password)}>Вход</button>
             </form>
-            <Link className="login__regLink auth__link" to="/authentification/reg">Регистрация</Link>
+            <div className="login__links">
+                <Link className="login__regLink auth__link" to="/home">Главная</Link>
+                <Link className="login__regLink auth__link" to="/authentification/reg">Регистрация</Link>
+            </div>
         </div>
     )
 }

@@ -129,6 +129,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    flex-wrap: wrap;
+    row-gap: 30px;
 }
 
 .auth__form {
@@ -142,6 +144,11 @@ body {
     background-color: white;
     border-radius: 20px;
     row-gap: 40px;
+}
+@media (max-width: 420px) {
+    .auth__form {
+        margin: 30px 0;
+    }
 }
 .login {
 }
@@ -200,6 +207,11 @@ a.auth__link {
 .button {
     background-color: var(--btn);
     border-radius: 50px;
+}
+
+.login__links {
+    display: flex;
+    justify-content: space-between;
 }
 
 .login__submit {
@@ -320,7 +332,7 @@ a.auth__link {
 .header__container {
     padding: 15px 0;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .home__container {
@@ -329,7 +341,7 @@ a.auth__link {
     row-gap: 60px;
 }
 
-.home__cabinet {
+.home__link {
     padding: 10px 25px;
     background-color: var(--btn);
     border-radius: 50px;
@@ -354,6 +366,32 @@ div.swiper {
     background-color: white;
 }
 
+.home__search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.home__search-wrapper button {
+    position: absolute;
+    right: 30px;
+}
+.home__search-wrapper img{
+    width: 20px;
+    height: 100%;
+}
+
+.home__search {
+    flex-grow: 1;
+    background-color: white;
+    padding: 15px 30px;
+    border-radius: 20px;
+}
+
+.home__search::placeholder {
+
+}
+
 .home__slider {
     height: 100%;
 }
@@ -366,6 +404,8 @@ div.swiper-slide {
 .home__teamCard {
     transition: .7s;
 }
+
+
 .teamCard {
     position: relative;
     display: flex;
@@ -375,7 +415,7 @@ div.swiper-slide {
     height: 320px;
     overflow: hidden;
     border-radius: 20px;
-    box-shadow: 0 0 4px 2px var(--link);
+    box-shadow: 0 0 0 2px var(--link);
     cursor: pointer;
     transition: .7s;
     
@@ -394,13 +434,16 @@ div.swiper-slide {
 }
 .teamCard__title {
     /* background-color: #e1c9ffb9; */
-    background-color:#f9f4ff;
+    background-color:#f9f4ffc7;
     border-radius: 15px;
     padding: 5px 15px;
     /* color: #28094e; */
     text-align: center;
-    color:#7406fb;
     font-size: 20px;
+}
+
+span.swiper-pagination-bullet-active {
+    background-color: var(--link);
 }
 
 .teamcard__banner {
