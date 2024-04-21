@@ -7,8 +7,7 @@ export default function Login() {
 
     const clickHandler = useCallback((e,login,pass) => {
             e.preventDefault();
-            console.log({login: login,password: pass});
-            fetch('http://localhost:8080/api/authentication/auth', {
+            fetch('#', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
@@ -16,7 +15,10 @@ export default function Login() {
                 mode: 'no-cors',
                 body: JSON.stringify({login: login,password: pass})
             }).then((response) => {
-                console.log(response)
+                if(response.status == 200) {
+                    /*Здесь должна быть обработка ответа сервера*/
+                    console.log('Авторизован');
+                }
                 return response.json();
             }).then((data) => {
                 console.log(data);

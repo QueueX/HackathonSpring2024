@@ -26,7 +26,7 @@ export default function HomePage() {
     })
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/authentication/reg', {
+        fetch('#', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -36,10 +36,9 @@ export default function HomePage() {
                 options: teamName
             })
         }).then((response) => {
-            console.log(response)
             return response.json();
         }).then((data) => {
-            console.log(data);
+            setTeams(data);
         }).catch(error => {
             console.log(error);
             setTeams([
@@ -65,40 +64,6 @@ export default function HomePage() {
             options: teamName
         });
     },[teamName])
-
-
-    const extraClick = useCallback(() => {
-        fetch('http://localhost:8080/api/authentication/reg', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8'
-            },
-            body: JSON.stringify({   name : "Uwu",
-                bannerUrl : "photo",
-                members : [
-                    {
-                        name : "Alex",
-                        photoUrl : "qwfuio",
-                        about : "ipjeoifewoifjewoijfeiojwiojfiowejio"
-                    },
-                    {
-                        name : "Ivan",
-                        photoUrl : "qwfuiofdff",
-                        about : "ipjeoifewoifjeqwrqrwoijfeiojwiojfiowejio"
-                    }
-                ],
-                email : "efwijewoij",
-                login : "uwu",
-                password : "123"
-            })
-        }).then((response) => {
-            console.log(response);
-            return response.json();
-        }).then((data) => {
-            console.log(data)
-        }).catch(() => console.log('error'))
-    }
-    )
     return (
         <>
             <HomeHeader />

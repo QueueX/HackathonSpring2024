@@ -6,6 +6,7 @@ import { useState, useCallback, useEffect} from "react";
 export default function SinglePageCard() {
     const [memberDescription,setMemberDescription] = useState('');
     const [memberName,setMemberName] = useState('');
+    /*Пример со статической подгрузкой данных*/
     const [members,setMembers] = useState([
         {name: 'Maks',description:'lalal aopskaspvo ojlksmn aofjaovnasvn',photo: banner},
         {name: 'Dima',description:'scmacascmscmkasckasm askmaskmc asckmas ascakscm',photo: banner},
@@ -24,13 +25,9 @@ export default function SinglePageCard() {
         setActiveMember(index);
     }) 
 
-    const ClickOutHandler = useCallback(() => {
-
-    })
-
     useEffect(() => {
         clickHandler(0);
-        fetch('http://localhost:8080/api/authentication/reg', {
+        fetch('#', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'

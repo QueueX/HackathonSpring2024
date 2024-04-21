@@ -78,7 +78,6 @@ export default function RegistrationForm({addMember,members,membersChange}) {
     })
 
     const registrationSubmit = useCallback((e) => {
-        console.log('pizda');
         e.preventDefault();
         fetch('http://localhost:8080/api/authentication/reg', {
             method: 'POST',
@@ -94,60 +93,21 @@ export default function RegistrationForm({addMember,members,membersChange}) {
                 password: password
             })
         }).then((response) => {
+            if (response.status == 200) {
+                setMail('');
+                setTeamName('');
+                setLogin('');
+                setPassword('');
+                setBanner('');
+                membersChange([]);
+            }
             return response.json();
         }).then((data) => {
             console.log(data);
         }).catch(error => {
             console.log(error);
         });
-        console.log({
-            teamName: teamName,
-            login: login,
-            password: password,
-            bannerUrl: banner,
-            members: members,
-            mail: mail
-        });
-        setMail('');
-        setTeamName('');
-        setLogin('');
-        setPassword('');
-        setBanner('');
-        membersChange([]);
     })
-    // console.log(banner);
-    // if(banner?.trim()){
-    //     console.log('send photos');
-    //     fetch('http://localhost:3003', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json;charset=utf-8'
-    //         },
-    //         mode: 'no-cors',
-    //         body: JSON.stringify({
-    //             bannerUrl: banner,
-    //             teamName: teamName,
-    //             type: 'banner'
-    //         })
-    //     }).catch(err => console.log(err));
-    //     console.log(members)
-    //     members.forEach((item) => {
-    //         console.log(item);
-    //         fetch('http://localhost:3003', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json;charset=utf-8'
-    //             },
-    //             mode: 'no-cors',
-    //             body: JSON.stringify({
-    //                 bannerUrl: item.photoUrl,
-    //                 teamName: teamName,
-    //                 type: 'photo',
-    //                 member: item.name,
-    //             })
-    //         }).catch(err => console.log(err));      
-    //     })
-    // }
     return (
         <div className="auth__form registration">
             <h1 className="registration__header auth__header">Регистрация</h1>
