@@ -16,9 +16,9 @@ function App() {
           <Route path="reg" element={<Registration />}></Route>
         </Route>
         <Route path="/" element={<HomeLayout/>}>
-          <Route path="home" element={<HomePage />}></Route>
-          <Route path="home/cabinet" element={<HomePage />}></Route>
-          <Route path="home/:teamName" element={<SinglePageCard />}></Route>
+          <Route path="" element={<HomePage />}></Route>
+          <Route path="cabinet" element={<HomePage />}></Route>
+          <Route path=":teamName" element={<SinglePageCard />}></Route>
         </Route>
       </Routes>
     </>
