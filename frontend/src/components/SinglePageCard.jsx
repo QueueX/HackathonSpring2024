@@ -1,5 +1,6 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import banner from './../img/teamBanner.jpg';
+import crossSvg from './../img/cross.svg';
 import { useState, useCallback, useEffect} from "react";
 
 export default function SinglePageCard() {
@@ -22,6 +23,10 @@ export default function SinglePageCard() {
         setMemberPhoto(members[index]?.photo);
         setActiveMember(index);
     }) 
+
+    const ClickOutHandler = useCallback(() => {
+
+    })
 
     useEffect(() => {
         clickHandler(0);
@@ -50,6 +55,7 @@ export default function SinglePageCard() {
     return (
         <> 
             <div className="single-page__header">
+                <Link to="/home" className="single-page__out"><img src={crossSvg} alt="cross" /></Link>
                 <h2 className="single-page__title">Команда: {teamName}</h2>
                 <img src={banner} alt="" className="single-page__banner" />
             </div>

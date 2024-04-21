@@ -1,6 +1,10 @@
 import HomeHeader from './HomeHeader'
 import Slider from './Swiper'
-import banner from './../img/teamBanner.jpg';
+import banner1 from './../img/teamBanner.jpg';
+import banner2 from './../img/teamBanner2.jpg';
+import banner3 from './../img/teamBanner3.jpg';
+import banner4 from './../img/teamBanner4.jpg';
+import banner5 from './../img/teamBanner5.jpg';
 import searchSvg from './../img/search.svg';
 import { useState, useRef, useCallback, useEffect } from 'react';
 
@@ -8,13 +12,13 @@ export default function HomePage() {
 
     const [teamName,setTeamName] = useState('');
     const [teams,setTeams] = useState([{name: "UWU",
-    banner: banner},
+    banner: banner1},
     {name: "Наш ход",
-    banner: banner},
+    banner: banner2},
     {name: "ВПР23",
-    banner: banner},
+    banner: banner3},
     {name: "Чемпионы",
-    banner: banner}]);
+    banner: banner4}]);
     const input = useRef();
 
     const clickHandler = useCallback(() => {
@@ -39,14 +43,22 @@ export default function HomePage() {
         }).catch(error => {
             console.log(error);
             setTeams([
-                {name: "Ошибка",
-                banner: banner},
-                {name: "Ошибка",
-                banner: banner},
-                {name: "Ошибка",
-                banner: banner},
-                {name: "Ошибка",
-                banner: banner}
+                {name: "УВУ",
+                banner: banner1},
+                {name: "Наш ход",
+                banner: banner2},
+                {name: "Хакеры",
+                banner: banner3},
+                {name: "Питонисты",
+                banner: banner4},
+                {name: "Страна Возможностей",
+                banner: banner5},
+                {name: "Профики",
+                banner: banner1},
+                {name: "Наши слоняры",
+                banner: banner2},
+                {name: "Джависты",
+                banner: banner2}
             ]);
         });
         console.log({
@@ -54,6 +66,39 @@ export default function HomePage() {
         });
     },[teamName])
 
+
+    const extraClick = useCallback(() => {
+        fetch('http://localhost:8080/api/authentication/reg', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            body: JSON.stringify({   name : "Uwu",
+                bannerUrl : "photo",
+                members : [
+                    {
+                        name : "Alex",
+                        photoUrl : "qwfuio",
+                        about : "ipjeoifewoifjewoijfeiojwiojfiowejio"
+                    },
+                    {
+                        name : "Ivan",
+                        photoUrl : "qwfuiofdff",
+                        about : "ipjeoifewoifjeqwrqrwoijfeiojwiojfiowejio"
+                    }
+                ],
+                email : "efwijewoij",
+                login : "uwu",
+                password : "123"
+            })
+        }).then((response) => {
+            console.log(response);
+            return response.json();
+        }).then((data) => {
+            console.log(data)
+        }).catch(() => console.log('error'))
+    }
+    )
     return (
         <>
             <HomeHeader />
@@ -63,7 +108,7 @@ export default function HomePage() {
             </div>
             
             <div className="home__slider-wrapper">
-                <Slider slides={teams}></Slider>
+                <Slider keyWord={teamName} slides={teams}></Slider>
             </div>
         </>
     )

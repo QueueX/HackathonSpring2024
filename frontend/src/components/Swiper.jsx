@@ -10,8 +10,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-export default function Slider({slides}) {
-    console.log(slides);
+export default function Slider({slides,keyWord}) {
   return (
     <Swiper className="home__slider"
       // install Swiper modules
@@ -20,7 +19,6 @@ export default function Slider({slides}) {
       slidesPerView={3}
       navigation
       pagination={{ clickable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
       autoplay={{
         delay: 2500,
         pauseOnMouseEnter: true,
@@ -30,7 +28,10 @@ export default function Slider({slides}) {
       loop={true}
     >
         {
-            slides.map((item,index) => (
+            slides.filter((item) => {
+                if(keyWord) return item.name.includes(keyWord);
+                else {return item};
+            }).map((item,index) => (
                 <SwiperSlide key={index}>
                     <TeamCard name={item.name} banner={item.banner}/>
                 </SwiperSlide>

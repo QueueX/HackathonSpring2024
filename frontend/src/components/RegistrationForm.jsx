@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, json } from "react-router-dom"
 import { useCallback, useState, useEffect } from "react"
 
 import crossSvg from './../img/cross.svg';
@@ -12,51 +12,23 @@ export default function RegistrationForm({addMember,members,membersChange}) {
     let [password,setPassword] = useState('');
     let [mailWrong,setMailWrong] = useState(false);
     let [passWrong,setPassWrong] = useState(false);
+    let [bannerWrong,setBannerWrong] = useState(false);
+    let [bannerSizeWrong,setBannerSizeWrong] = useState(false);
     let [membersWrong,setMembersWrong] = useState(false);
 
     async function bannerChange(event) {
-        // let fileReader = new FileReader();
-        // fileReader.onload = function() {
-        //     setBanner(fileReader.result);
-        // }
-
-        // fileReader.readAsDataURL(event.target.files[0])
-        // const file = event.target.files[0];
-        const file = event.target.files[0];
-        try {
-            const imageUrl = await uploadImageToImgur(file, '877843ad1216eeb');
-            console.log("Ссылка на изображение: " + imageUrl);
-        } catch (error) {
-            console.error(error);
-        }
-
-    }
-    const uploadImageToImgur = async (file, client_id) => {
-        const formData = new FormData();
-        formData.append('image', file);
-    
-        try {
-            const response = await fetch('https://api.imgur.com/3/image', {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Client-ID ' + client_id
-                },
-                body: formData
-            });
-    
-            const data = await response.json();
-    
-            if (data.success) {
-                const imageUrl = data.data.link;
-                return imageUrl;
-            } else {
-                throw new Error("Ошибка при загрузке изображения: " + data.data.error);
+        if(event.target.files[0].size < 2 * 1024 * 1024){
+            setBannerSizeWrong(false);
+            let fileReader = new FileReader();
+            fileReader.onload = function() {
+                setBanner(fileReader.result);
             }
-        } catch (error) {
-            throw new Error("Ошибка при выполнении запроса: " + error.message);
+            fileReader.readAsDataURL(event.target.files[0])
+        } else {
+            setBannerSizeWrong(true)
         }
-    };
-
+    }
+    
     function addCLickHAndler(event) {
         event.preventDefault();
         addMember(true);
@@ -93,37 +65,35 @@ export default function RegistrationForm({addMember,members,membersChange}) {
         } else {
             setMembersWrong(false);
         }
+        if(!banner) {
+            setBannerWrong(true);
+        } else {
+            setBannerWrong(false);
+        }
 
-    },[mail,teamName,login,password,members])
+    },[mail,teamName,login,password,members,banner])
 
     const changeHandler = useCallback((e,setter) => {
         setter(e.target.value);
     })
 
     const registrationSubmit = useCallback((e) => {
+        console.log('pizda');
         e.preventDefault();
-        setMail('');
-        setTeamName('');
-        setLogin('');
-        setPassword('');
-        setBanner('');
-        membersChange([]);
         fetch('http://localhost:8080/api/authentication/reg', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json;charset=utf-8'
+                'Content-Type': 'application/json;charset=UTF-8'
             },
             mode: 'no-cors',
             body: JSON.stringify({
                 teamName: teamName,
-                banneUrl: banner,
                 members: members,
                 mail: mail,
                 login: login,
                 password: password
             })
         }).then((response) => {
-            console.log(response)
             return response.json();
         }).then((data) => {
             console.log(data);
@@ -138,8 +108,46 @@ export default function RegistrationForm({addMember,members,membersChange}) {
             members: members,
             mail: mail
         });
+        setMail('');
+        setTeamName('');
+        setLogin('');
+        setPassword('');
+        setBanner('');
+        membersChange([]);
     })
-
+    // console.log(banner);
+    // if(banner?.trim()){
+    //     console.log('send photos');
+    //     fetch('http://localhost:3003', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json;charset=utf-8'
+    //         },
+    //         mode: 'no-cors',
+    //         body: JSON.stringify({
+    //             bannerUrl: banner,
+    //             teamName: teamName,
+    //             type: 'banner'
+    //         })
+    //     }).catch(err => console.log(err));
+    //     console.log(members)
+    //     members.forEach((item) => {
+    //         console.log(item);
+    //         fetch('http://localhost:3003', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json;charset=utf-8'
+    //             },
+    //             mode: 'no-cors',
+    //             body: JSON.stringify({
+    //                 bannerUrl: item.photoUrl,
+    //                 teamName: teamName,
+    //                 type: 'photo',
+    //                 member: item.name,
+    //             })
+    //         }).catch(err => console.log(err));      
+    //     })
+    // }
     return (
         <div className="auth__form registration">
             <h1 className="registration__header auth__header">Регистрация</h1>
@@ -150,7 +158,9 @@ export default function RegistrationForm({addMember,members,membersChange}) {
                 </div>
                 <div className="auth__inputBlock">
                     <label htmlFor="inputPhoto" className="auth__label">Баннер команды:</label>
-                    <input id="inputPhoto" type="file" className="auth__input" onChange={bannerChange}/>
+                    <input id="inputPhoto" type="file" className="auth__input" files={banner} accept=".jpeg,.pdf,.png" onChange={bannerChange}/>
+                    {bannerWrong ? <p className="auth__errorMessage">Баннер не загружен !</p> : null}
+                    {bannerSizeWrong ? <p className="auth__errorMessage">Размер превышает 2MB !</p> : null}
                     {banner && <div className="banner-wrapper"><img src={banner} alt="bannerTeam" className="banner" /></div>}
                 </div>
                 <div className="auth__inputBlock">
@@ -183,7 +193,7 @@ export default function RegistrationForm({addMember,members,membersChange}) {
                     {passWrong ? <p className="auth__errorMessage">Пароль должен содержать 8 символов<br/>*Содержит 1 заглвную букву <br/>*Содержит 1 строчную букву</p> : null}
                 </div>
                 {hasError ? <p className="auth__errorMessage">Поля не должны быть пустыми !</p> : null}
-                <button className="login__submit button" disabled={hasError || mailWrong || passWrong || membersWrong} onClick={registrationSubmit}>Зарегистрироваться</button>
+                <button className="login__submit button" disabled={hasError || mailWrong || passWrong || membersWrong || bannerWrong} onClick={registrationSubmit}>Зарегистрироваться</button>
             </form>
             <p>Есть аккаунт?&nbsp;&nbsp;<Link className="login__regLink auth__link" to="/authentification/auth"> Войти</Link></p>
         </div>
