@@ -19,6 +19,22 @@
           </set>
         </option>
       </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/ProfileService" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/ProfileService" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/RatingService" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/RatingService" />
+          </set>
+        </option>
+      </GradleProjectSettings>
     </option>
   </component>
 </project>
