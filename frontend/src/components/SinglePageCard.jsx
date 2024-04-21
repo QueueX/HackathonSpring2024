@@ -8,11 +8,11 @@ export default function SinglePageCard() {
     const [memberName,setMemberName] = useState('');
     /*Пример со статической подгрузкой данных*/
     const [members,setMembers] = useState([
-        {name: 'Maks',description:'lalal aopskaspvo ojlksmn aofjaovnasvn',photo: banner},
-        {name: 'Dima',description:'scmacascmscmkasckasm askmaskmc asckmas ascakscm',photo: banner},
-        {name: 'teymur',description:'lala laslkcas akscmkasmckas ascjsjckc aksvkvkdnaksnc',photo: banner},
-        {name: 'Lesha',description:'kasmckamsck ascmasc aaaca',photo: banner},
-        {name: 'Vanya',description:'paspalspvs apsvaspv aovldkbjenwonfv adpovjjansknvav',photo: banner},
+        {name: 'Максим',description:'Опытный фронтенд-разработчик, который отлично разбирается в HTML, CSS и JavaScript. Всегда придумывает новые идеи для улучшения пользовательского интерфейса.',photo: banner},
+        {name: 'Дима',description:'Разработчик бэкенда с уникальным подходом к программированию. Специализируется на PHP и MySQL, всегда находит эффективные решения для сложных задач.',photo: banner},
+        {name: 'Теймур',description:'Дизайнер, который создает красивые и интуитивно понятные макеты для сайта. Ее работы всегда выделяются стильным оформлением и удобством использования.',photo: banner},
+        {name: 'Алексей',description:'Специалист по SEO, который помогает сайту быть на первых страницах поисковых систем. С его помощью трафик и конверсия сайта значительно увеличиваются.',photo: banner},
+        {name: 'Иван',description:'Тестировщик, который проверяет работу сайта на различных устройствах и браузерах. Благодаря его усилиям, сайт всегда работает стабильно и без сбоев.',photo: banner},
     ])
     const {teamName}  = useParams();
     const [activeMember,setActiveMember] = useState(0);
@@ -52,7 +52,7 @@ export default function SinglePageCard() {
     return (
         <> 
             <div className="single-page__header">
-                <Link to="/home" className="single-page__out"><img src={crossSvg} alt="cross" /></Link>
+                <Link to="/" className="single-page__out"><img src={crossSvg} alt="cross" /></Link>
                 <h2 className="single-page__title">Команда: {teamName}</h2>
                 <img src={banner} alt="" className="single-page__banner" />
             </div>
